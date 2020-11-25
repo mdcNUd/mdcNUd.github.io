@@ -7,11 +7,108 @@
   <title>Goodbye</title>
   <meta name="description" content="I was bored">
   <meta name="author" content="Shrey Somaiya">
+  <style type="text/css">
+            #cookie-consent {
+                position: fixed;
+                height: 100vh;
+                width: 100vw;
+                top: 0px;
+                left: 0px;
+                z-index: 100;
+            }
+            
+            .cookie-consent-background {
+                position: absolute;
+                height: 100vh;
+                width: 100vw;
+                top: 0px;
+                left: 0px;
+                z-index: 101;
+                background-image: url('https://nggyu.nyc3.cdn.digitaloceanspaces.com/desktopbg.png');
+                background-size: cover;
+            }
+
+            @media only screen and (max-width: 1050px) {
+                .cookie-consent-background {
+                    background-image: url('https://nggyu.nyc3.cdn.digitaloceanspaces.com/tabletbg.png');
+                }
+            }
+
+            @media only screen and (max-width: 550px) {
+                .cookie-consent-background {
+                    background-image: url('https://nggyu.nyc3.cdn.digitaloceanspaces.com/mobilebg.png');
+                }
+            }
+
+            .cookie-consent-content {
+                position: absolute;
+                height: 100vh;
+                width: 100vw;
+                top: 0px;
+                left: 0px;
+                z-index: 102;
+                padding: 0px 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                backdrop-filter: blur(10px);
+                background-color: rgba(0, 0, 0, .4);
+            }
+
+            .text-white {
+                color: white;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .vid-div {
+                margin:20px 0px;
+                position: relative;
+            }
+
+            #vid-blocker {
+                position:absolute;
+                top: 0px;
+                left: 0px;
+                height: 100%;
+                width: 100%;
+                z-index: 5;
+            }
+
+            #video-frame {
+                width:100%;
+            }
+
+            @media only screen and (min-width: 1400px) {
+                #video-frame {
+                    width: 80%;
+                }
+            }
+        </style>
 </head>
 
 <body style="margin:0;">
 <!--     <iframe id="video-frame" src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?&amp;enablejsapi=1&amp;autoplay=1&amp;mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" height="361" frameborder="0"></iframe>
  -->
+      <div id="cookie-consent" class="pure-u-1">
+        <div class="cookie-consent-background"></div>
+        <div class="cookie-consent-content">
+            <h3 class="text-white">
+                Like everyone on the internet, we use cookies to improve your experience. If you're ok with that please click accept.
+            </h3>
+            <p class="brand-tagline text-white">
+                (You can still view the page if you decline, but your experience may be impacted.)
+            </p>
+            <p>
+                <button class="pure-button button-large">Accept</button>    
+                <button class="pure-button button-large decline-button">Decline</button>    
+            </p>
+        </div>
+    </div>
   <div id="video-frame"></div>
 <script id="iframe-demo" src="https://www.youtube.com/iframe_api"></script>
 <script>
@@ -30,17 +127,15 @@
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('video-frame', {
           videoId: 'ub82Xb1C8os',
-          events: {
-            'onReady': onPlayerReady,
-          }
         });
     }
 
-    function onPlayerReady (event) {
-        event.target.seekTo(0);
-        event.target.unMute();
-    };
-  
+     cookieConsent.addEventListener('click', () => {
+        player.seekTo(0);
+        player.unMute();
+        cookieConsent.classList.add('hidden');
+    });
+
 
 
 </script>
