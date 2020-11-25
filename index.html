@@ -13,7 +13,29 @@
     <iframe id="video-frame" src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?&amp;enablejsapi=1&amp;autoplay=1&amp;mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" height="361" frameborder="0"></iframe>
 
 </body>
+<script id="iframe-demo" src="https://www.youtube.com/iframe_api"></script>
 <script>
   // credit to https://gist.githubusercontent.com/AnderssonPeter/7460602872b5e96b9d4a49a96553830e/raw/6aa0252d4333bb8af252531625ac730ff1db69ff/Rickroll%25202
+    var player;
+    var frame = document.querySelector('#video-frame');
+    var cookieConsent = document.querySelector('#cookie-consent');
+    var firstScriptTag = document.querySelector('script');
+    var tag = document.createElement('script');
+    tag.id = 'iframe-demo';
+    tag.src = 'https://www.youtube.com/iframe_api';
+    frame.setAttribute('height', Math.floor(frame.clientWidth * .6));
+
+    window.addEventListener('DOMContentLoaded', () => {
+        player.seekTo(0);
+        player.unMute();
+    });
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('video-frame');
+    }
+
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 </script>
+  
 </html>
